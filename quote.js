@@ -1,28 +1,19 @@
 // Variables
-let btn = document.querySelector('#new-quote');
-let quote = document.querySelector('.quote');
-let quoteBy = document.querySelector('.person');
+const btn = document.querySelector("#new-quote");
+const quote = document.querySelector(".quote");
+const quoteBy = document.querySelector(".person");
 
-const quoteArr = [{
-    quote: "There Is No Greater Thing You Can Do With Your Life And Your Work Than Follow Your Passions – In A Way That Serves The World And You.",
-    person: "Richard Branson"
-},
-{
-    quote: "As soon as something stops being fun, I think it’s time to move on. Life is too short to be unhappy. Waking up stressed and miserable is not a good way to live.",
-    person: "Richard Branson"
-},
-{
-    quote: "If you dont like the road you’re walking, start paving another one.",
-    person: "Dolly Parton"
-},
-{
-    quote: "The best and most beautiful things in the world cannot be seen or even touched. They must be felt with the heart.",
-    person: "Helen Keller"
-}];
+const API = "https://api.kanye.rest";
 
-btn.addEventListener('click', function() {
-    let random = Math.floor(Math.random() * quoteArr.length);
+btn.addEventListener("click", getQuotes);
 
-    quote.innerText = quoteArr[random].quote;
-    quoteBy.innerText = quoteArr[random].person.toUpperCase();
-});
+async function getQuotes() {
+  const response = await fetch(API);
+  const data = await response.json();
+
+  displayQuotes(data.quote);
+}
+
+function displayQuotes(quotes) {
+  quote.innerHTML = `"${quotes}"`;
+}
