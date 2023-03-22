@@ -11,9 +11,9 @@ async function getQuotes() {
   const response = await fetch(API);
   const data = await response.json();
 
-  displayQuotes(data.quote);
+  displayQuotes(data);
 }
 
-function displayQuotes(quotes) {
-  quote.innerHTML = `"${quotes}"`;
+function displayQuotes({quote}) {
+  quote.innerHTML = `"${quote}"`;
 }
